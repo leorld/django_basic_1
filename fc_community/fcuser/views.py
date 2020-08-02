@@ -1,9 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Fcuser
 from django.contrib.auth.hashers import make_password, check_password  # 비밀번호 암호화함수, 확인함수
 from django.http import HttpResponse
 
 # Create your views here.
+
+
+def home(request):
+    user_id = request.session.get('user')
+    # 세션에 저장된 사용자의 고유한 id값으로 로그인을 했는지 안했는지 판단
+    if user_id:
+        fcuser = Fcuser.objects.get(pk=user_id)
+        return HttpResponse(fcuser.username)
+
+    return HttpResponse("HOME!!")
 
 
 def login(request):
@@ -20,12 +30,19 @@ def login(request):
             # 모델 호출 objects.get(조건) // 조건 앞 변수 : 모델 , 뒷 변수 : 입력받은 내용
             fcuser = Fcuser.objects.get(username=username)
             if check_password(password, fcuser.password):
-                # 비밀번호가 일치, 로그인 처리
-                res_data['error'] = '로그인되었습니다.'
-                pass
+                request.session['user'] = fcuser.id
+                # session의 user라는 키에 fcuser의 id값을 저장
+                return redirect('/')  # 홈으로 이동
             else:
                 res_data['error'] = '비밀번호를 틀렸습니다.'
         return render(request, 'login.html', res_data)
+
+
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+
+    return redirect('/')
 
 
 def register(request):  # 함수를 url에 연결하면 request변수를 통해서 들어옴
