@@ -13,18 +13,20 @@ def register(request):  # 함수를 url에 연결하면 request변수를 통해�
     elif request.method == "POST":
         # 딕셔너리 형태이므로 get함수를 사용하여 빈 문자열일때 None 초기값 설정
         username = request.POST.get('username', None)
+        useremail = request.POST.get('useremail', None)
         password = request.POST.get('password', None)
         re_password = request.POST.get('re-password', None)
 
         res_data = {}
 
-        if not(username and password and re_password):
+        if not(username and useremail and password and re_password):
             res_data['error'] = "모든 값을 입력하세요."
         elif password != re_password:
             res_data['error'] = "비밀번호가 다릅니다!"  # res_data의 error라는 키에 문자열을 삽입
         else:
             fcuser = Fcuser(
                 username=username,
+                useremail=useremail,
                 password=make_password(password)  # 암호화해서 저장
             )
         # 입력받은 값으로 객체를 생성하고

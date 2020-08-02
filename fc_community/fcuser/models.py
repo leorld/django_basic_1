@@ -6,6 +6,8 @@ from django.db import models
 class Fcuser(models.Model):
     # verbose_name 으로 필드 명명(admin 등에서 참조할 때 username이 아니라 사용자명으로 보임)
     username = models.CharField(max_length=32, verbose_name='사용자명')
+    useremail = models.EmailField(
+        max_length=128, verbose_name="사용자 이메일")  # 모델이 바뀌면 migration재생성
     password = models.CharField(max_length=64, verbose_name='비밀번호')
     registered_dttm = models.DateTimeField(
         auto_now_add=True, verbose_name='등록시간')  # auto_now_add : 저장되는 시점을 자동으로 저장
