@@ -6,6 +6,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 
+def login(request):
+    return render(request, 'login.html')
+
+
 def register(request):  # 함수를 url에 연결하면 request변수를 통해서 들어옴
     # template폴더를 이미 바라보고있기 때문에 그 안의 register.html로 바로 접근가능
     if request.method == "GET":
