@@ -17,6 +17,5 @@ class Fcuser(models.Model):
     class Meta:
         # 클래스 내 클래스로 db테이블 명 지정(기존 생성되는 앱과 구분을 위함)
         db_table = 'fastcampus_fcuser'
-        verbose_name = '패스트캠퍼스 사용자'  # admin
-        초기화면 표기수정
+        verbose_name = '패스트캠퍼스 사용자'  # admin 초기화면 표기수정
         verbose_name_plural = '패스트캠퍼스 사용자'
