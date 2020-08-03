@@ -3,13 +3,20 @@ from .models import Board
 from .forms import BoardForm
 from fcuser.models import Fcuser
 from django.http import Http404
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
 def board_list(request):
     # 모든 게시글을 가지고오고 시간역순(최신순)으로 (-:역순) 정렬하겠다.
-    boards = Board.objects.all().order_by('-id')
+    all_boards = Board.objects.all().order_by('-id')
+    page = int(request.GET.get('p', 1))  # page = p라는 변수로 하나의 숫자를 받음
+    paginator = Paginator(all_boards, 2)  # Paginator()함수로 all_boards중 2개씩 나타냄
+
+    boards = paginator.get_page(page)  # 나타난 boards page를 가져옴
+    # boards에 page정보가 추가되어있음 -> list페이지에서 활용가능
+
     return render(request, 'board_list.html', {'boards': boards})
 
 
