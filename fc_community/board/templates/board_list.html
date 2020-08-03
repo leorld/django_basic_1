@@ -8,14 +8,16 @@
         <th>아이디</th>
         <th>일시</th>
       </thead>
-      {{boards}}
+
       <tbody>
+        {% for board in boards %}
         <tr>
-          <th>1</th>
-          <td>제목 테스트</td>
-          <td>fcuser</td>
-          <td>2020-08-03 22:00:00</td>
+          <th>{{board.id}}</th>
+          <td>{{ board.title }}</td>
+          <td>{{ board.writer }}</td>
+          <td>{{ board.registered_dttm }}</td>
         </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
