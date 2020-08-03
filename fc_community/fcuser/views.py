@@ -7,13 +7,12 @@ from .forms import LoginForm
 
 
 def home(request):
-    user_id = request.session.get('user')
-    # 세션에 저장된 사용자의 고유한 id값으로 로그인을 했는지 안했는지 판단
-    if user_id:
-        fcuser = Fcuser.objects.get(pk=user_id)
-        return HttpResponse(fcuser.username)
-
-    return HttpResponse("HOME!!")
+    # user_id = request.session.get('user')
+    # # 세션에 저장된 사용자의 고유한 id값으로 로그인을 했는지 안했는지 판단
+    # if user_id:
+    #     fcuser = Fcuser.objects.get(pk=user_id)
+    # home.html에서 session으로 수정
+    return render(request, 'home.html')
 
 
 def login(request):

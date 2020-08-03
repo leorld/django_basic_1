@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+<!-- base.html을 상속받음 -->
+
+{% block contents %}
+<!-- block contents를 지정 -->
+<div class="row mt-5">
+  <div class="col-12 text-center">
+    <h1>HOMEPAGE</h1>
+  </div>
+</div>
+<div class="row mt-5">
+  {% if request.session.user %}
+  <div class="col-12">
+    <button
+      class="btn btn-primary btn-block"
+      onclick="location.href='/fcuser/logout/'"
+    >
+      로그아웃
+    </button>
+  </div>
+  {% else %}
+  <div class="col-6">
+    <button
+      class="btn btn-primary btn-block"
+      onclick="location.href='/fcuser/login/'"
+    >
+      로그인
+    </button>
+  </div>
+  <div class="col-6">
+    <button
+      class="btn btn-primary btn-block"
+      onclick="location.href='/fcuser/register/'"
+    >
+      회원가입
+    </button>
+  </div>
+  {% endif %}
+</div>
+<div class="row mt-1">
+  <div class="col-12">
+    <button
+      class="btn btn-primary btn-block"
+      onclick="location.href='/board/list'"
+    >
+      게시판
+    </button>
+  </div>
+</div>
+{% endblock %}
