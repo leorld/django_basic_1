@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block contents %}
+<div class="row mt-5">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <th>#</th>
+        <th>제목</th>
+        <th>아이디</th>
+        <th>일시</th>
+      </thead>
+      {{boards}}
+      <tbody>
+        <tr>
+          <th>1</th>
+          <td>제목 테스트</td>
+          <td>fcuser</td>
+          <td>2020-08-03 22:00:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary">글쓰기</button>
+  </div>
+</div>
+
+{% endblock %}
